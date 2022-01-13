@@ -1,20 +1,15 @@
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { PacientModal } from "../../components/Modal";
 import { Table } from "../../components/Table";
-import { Context } from "../../contexts/PacientsContext";
 import { IPacient } from "../../interfaces/IPacient";
 import { ContentContainer } from "../../styles/Containers";
 
 export const Home = () => {
 
-    const data = useContext(Context);
     
 
-
-    
-    const [searchTerm, setSearchTerm] = useState("");
     const [modalPacient, setModalPacient] = useState<IPacient | null>();
 
     
@@ -35,7 +30,7 @@ export const Home = () => {
             <ContentContainer flexDirection="column">
                 {modalPacient && <PacientModal pacient={modalPacient} clickFn={hideModal}/>}
                 
-                <Input onTextChange={(text) => setSearchTerm(text)}/>
+                <Input />
                 <Table handleModal={showModal}/>
 
 

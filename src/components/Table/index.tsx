@@ -10,7 +10,7 @@ type Props = {
 
 export const Table = (props: Props) => {
 
-  const data = useContext(Context);
+  const { pacients } = useContext(Context);
 
 
   return (
@@ -25,13 +25,13 @@ export const Table = (props: Props) => {
         </tr>
       </thead>
       <tbody>
-      {data.map((pacient: IPacient, index) => (
+      {pacients.map((pacient: IPacient, index) => (
                     
                     <tr key={index}>
                         <td className="border text-center px-8 py-1">{index+1}</td>
                         <td className="border text-center px-8 py-1">{formatFullName(pacient)}</td>
                         <td className="border text-center px-8 py-1">{pacient.gender}</td>
-                        <td className="border text-center px-8 py-1">{pacient.dob.date}</td>
+                        <td className="border text-center px-8 py-1">{new Date(pacient.dob.date).toLocaleDateString()}</td>
                         <td className="border text-center px-8 py-1">
                             <button onClick={() => props.handleModal(pacient)}>VER MAIS</button>
                         </td>

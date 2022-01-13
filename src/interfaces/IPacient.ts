@@ -1,3 +1,8 @@
+export interface ApiResponse {
+    results: Array<IPacient>;
+    info: IInfo;
+}
+
 export interface IPacient {
     gender: string;
     name: IName;
@@ -10,6 +15,13 @@ export interface IPacient {
     id: IId;
     picture: IPicture;
     nat: string;
+}
+
+export interface IInfo {
+    seed: string;
+    results: number;
+    page: number;
+    version: string;
 }
 
 interface IName {
@@ -69,3 +81,4 @@ interface IPicture {
     medium: string;
     thumbnail: string;
 }
+
