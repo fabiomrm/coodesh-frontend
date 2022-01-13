@@ -5,29 +5,33 @@ import axios from 'axios';
 
 type ContextType = {
     pacients: IPacient[];
-    currentPage: number;
+    page: number;
+    setPage: React.SetStateAction<any>;
+    fetchData: () => void;
 }
 const pacientsInitialState: Array<IPacient> = [];
 
 export const Context = createContext<ContextType>({
     pacients: pacientsInitialState,
-    currentPage: 0,
+    page: 0,
+    setPage: () => {},
+    fetchData: () => {},
 });
 
 export const ContextProvider: React.FC = ({ children }) => {
 
     const [pacients, setPacients] = useState<IPacient[]>(pacientsInitialState);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [page, setPage] = useState(1);
 
     const fetchData = async () => {
-        const response = await axios.get<ApiResponse>('https://randomuser.me/api/', {
+        const response = await axios.get<ApiResponse>('https://randomuser.me/api', {
             params: {
                 results: 50,
-                page: currentPage,
+                page: 1,
             }
            
         })
-        setPacients(response.data.results);
+        setPacients([...pacients, ...response.data.results]);
     }
 
 
@@ -42,7 +46,7 @@ export const ContextProvider: React.FC = ({ children }) => {
 
 
     return (
-        <Context.Provider value={{pacients, currentPage}}>
+        <Context.Provider value={{pacients, page, setPage, fetchData}}>
             {children}
         </Context.Provider>
     )
