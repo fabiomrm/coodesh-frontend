@@ -18,7 +18,7 @@ export const Home = () => {
     const handleLoadMore = () => {
       const newPage = page + 1;
       setPage(newPage);
-      fetchData()
+     
     }
       
       const showModal = (pacient: IPacient) => {
@@ -41,7 +41,7 @@ export const Home = () => {
                 <Table handleModal={showModal}/>
 
 
-                <div style={{marginTop: '100px'}}>
+                <div style={{marginTop: '50px', marginBottom: '100px'}}>
                   <button onClick={handleLoadMore}>Carregar mais</button>
                 </div>
             </ContentContainer>

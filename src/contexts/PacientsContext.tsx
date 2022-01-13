@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { ApiResponse, IPacient, IInfo } from '../interfaces/IPacient';
+import { ApiResponse, IPacient } from '../interfaces/IPacient';
 import axios from 'axios';
 
 
@@ -42,7 +42,7 @@ export const ContextProvider: React.FC = ({ children }) => {
 
     useEffect(() => {
         fetchData()
-    }, [])
+    }, [page])
 
 
     return (
