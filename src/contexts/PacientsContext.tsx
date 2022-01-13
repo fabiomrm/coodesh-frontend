@@ -1,30 +1,34 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState, useEffect } from 'react';
 import { IPacient } from '../interfaces/IPacient';
+import axios from 'axios';
 
-type PacientsContextProps = {
-    children: React.ReactNode
-}
+const pacientsInitialState: Array<IPacient> = [];
 
+export const Context = createContext<IPacient[]>(pacientsInitialState);
 
-type InitialValueType = {
-    pacients: Array<IPacient> | null;
-    setPacients: (pacients: IPacient[]) => void; 
-}
+export const ContextProvider: React.FC = ({ children }) => {
 
-const initialValue: InitialValueType = {
-    pacients: [],
-    setPacients: () => {},
-} 
+    const [pacients, setPacients] = useState<IPacient[]>(pacientsInitialState);
 
-export const PacientsContext = createContext<InitialValueType>(initialValue);
+    const fetchData = async () => {
+        const response = await axios.get('https://randomuser.me/api/', {
+            params: {
+                results: 50
+            }
+           
+        })
+        console.log(response.data.results)
+        setPacients(response.data.results);
+    }
 
-export const PacientsContextProvider = ({children}: PacientsContextProps) => {
+    useEffect(() => {
+        fetchData()
+    }, [])
 
-    const [pacients, setPacients] = useState<Array<IPacient> | null>(initialValue.pacients);
 
     return (
-        <PacientsContext.Provider value={{pacients, setPacients}}>
+        <Context.Provider value={pacients}>
             {children}
-        </PacientsContext.Provider>
+        </Context.Provider>
     )
 }

@@ -1,13 +1,18 @@
 import { IPacient } from "../../interfaces/IPacient";
 import { formatFullName } from "../../assets/utils";
 import { StyledTable } from "./styles";
+import { useContext } from "react";
+import { Context } from "../../contexts/PacientsContext";
 
 type Props = {
-  pacients: Array<IPacient>;
   handleModal: (pacient: IPacient) => void;
 };
 
 export const Table = (props: Props) => {
+
+  const data = useContext(Context);
+
+
   return (
     <StyledTable>
       <thead>
@@ -20,7 +25,7 @@ export const Table = (props: Props) => {
         </tr>
       </thead>
       <tbody>
-      {props.pacients.map((pacient: IPacient, index) => (
+      {data.map((pacient: IPacient, index) => (
                     
                     <tr key={index}>
                         <td className="border text-center px-8 py-1">{index+1}</td>
