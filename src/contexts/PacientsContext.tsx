@@ -7,7 +7,8 @@ type ContextType = {
     pacients: IPacient[];
     page: number;
     setPage: React.SetStateAction<any>;
-    fetchData: () => void;
+    loading: boolean;
+    setLoading: React.SetStateAction<any>;
 }
 const pacientsInitialState: Array<IPacient> = [];
 
@@ -15,13 +16,15 @@ export const Context = createContext<ContextType>({
     pacients: pacientsInitialState,
     page: 0,
     setPage: () => {},
-    fetchData: () => {},
+    loading: true,
+    setLoading: () => {},
 });
 
 export const ContextProvider: React.FC = ({ children }) => {
 
     const [pacients, setPacients] = useState<IPacient[]>(pacientsInitialState);
     const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(false);
 
     const fetchData = async () => {
         const response = await axios.get<ApiResponse>('https://randomuser.me/api', {
@@ -31,8 +34,11 @@ export const ContextProvider: React.FC = ({ children }) => {
             }
            
         })
+        console.log('bati aqui')
         setPacients([...pacients, ...response.data.results]);
+        setLoading(false)
     }
+
 
 
     // const filteredCustomers = searchTerm.trim().length > 0 ? 
@@ -46,7 +52,7 @@ export const ContextProvider: React.FC = ({ children }) => {
 
 
     return (
-        <Context.Provider value={{pacients, page, setPage, fetchData}}>
+        <Context.Provider value={{pacients, page, setPage, loading, setLoading}}>
             {children}
         </Context.Provider>
     )
