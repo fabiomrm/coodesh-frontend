@@ -20,14 +20,17 @@ export const Input = () => {
         transform: 'translateY(-50%)'
     };
 
-    const handleFilter = () => {
-        filter();
+    const handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
+      
+        if(e.target.name === "search-name") {
+            filter(e.target.value);
+        }
     }
 
     
     return (
         <StyledInput>
-          <input type="text" name="search" placeholder="Searching" onChange={handleFilter}/>
+          <input type="text" name="search-name" placeholder="Searching" onChange={(e) => handleFilter(e)}/>
           <RiUserSearchFill style={iconStyle}/>
         </StyledInput>
     );

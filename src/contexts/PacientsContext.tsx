@@ -6,19 +6,17 @@ import axios from 'axios';
 type ContextType = {
     pacients: IPacient[];
     displayingPacients: IPacient[];
-    setDisplayingPacients: React.SetStateAction<any>;
     page: number;
     setPage: React.SetStateAction<any>;
     loading: boolean;
     setLoading: React.SetStateAction<any>;
-    filter: () => void;
+    filter: (text: string) => void;
 }
 const pacientsInitialState: Array<IPacient> = [];
 
 export const Context = createContext<ContextType>({
     pacients: pacientsInitialState,
     displayingPacients: pacientsInitialState,
-    setDisplayingPacients: () => {},
     filter: () => {},
     page: 0,
     setPage: () => {},
@@ -48,15 +46,19 @@ export const ContextProvider: React.FC = ({ children }) => {
         setLoading(false)
     }
 
-    const filter = () => {
-        console.log('FILTRAR')
+    const filter = (text: string) => {
+        console.log(text.trim().length)
+        
+        const filteredPacients = text.trim().length > 0 ? pacients
+            .filter((pacient) => pacient.name.first.toLowerCase().indexOf(text.trim().toLowerCase()) >= 0) : pacients
+
+            console.log('filtrados: ' + filteredPacients.length);
+            console.log('todos: ' + pacients.length);
+            setDisplayingPacients(filteredPacients);
     }
 
 
-    // const filteredCustomers = searchTerm.trim().length > 0 ? 
-    // customers.filter(
-    //     (customer) => customer.name.toLowerCase().indexOf(searchTerm.trim().toLowerCase()) >= 0)
-    //         : customers
+   
 
     useEffect(() => {
         fetchData()
@@ -64,7 +66,7 @@ export const ContextProvider: React.FC = ({ children }) => {
 
 
     return (
-        <Context.Provider value={{pacients, page, setPage, loading, setLoading, filter, displayingPacients, setDisplayingPacients}}>
+        <Context.Provider value={{pacients, page, setPage, loading, setLoading, filter, displayingPacients }}>
             {children}
         </Context.Provider>
     )

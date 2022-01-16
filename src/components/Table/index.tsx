@@ -10,7 +10,8 @@ type Props = {
 
 export const Table = (props: Props) => {
 
-  const { pacients } = useContext(Context);
+  const { displayingPacients } = useContext(Context);
+  
 
 
   return (
@@ -25,7 +26,7 @@ export const Table = (props: Props) => {
         </tr>
       </thead>
       <tbody>
-      {pacients.map((pacient: IPacient, index) => (
+      {displayingPacients.map((pacient: IPacient, index) => (
                     
                     <tr key={index}>
                         <td className="border text-center px-8 py-1">{index+1}</td>
