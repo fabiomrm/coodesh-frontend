@@ -1,10 +1,9 @@
-import { ContentContainer } from "../../styles/Containers";
+
 import { StyledHeader } from "./styles";
 
 export const Header = () => {
   return (
-    <StyledHeader>
-        <ContentContainer>     
+    <StyledHeader>  
             <div className="left">
                 <div className="image-wrapper">
                     <img src="/images/logo.png" alt="logo" />
@@ -15,7 +14,6 @@ export const Header = () => {
             <div className="right">
                 <img src="/images/logo.png" alt="user" />
             </div>
-        </ContentContainer>
     </StyledHeader>
   );
 };

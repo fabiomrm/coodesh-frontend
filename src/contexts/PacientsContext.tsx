@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
 import { ApiResponse, IPacient } from '../interfaces/IPacient';
 import axios from 'axios';
+import { formatFullName } from '../assets/utils';
 
 
 type ContextType = {
@@ -10,7 +11,7 @@ type ContextType = {
     setPage: React.SetStateAction<any>;
     loading: boolean;
     setLoading: React.SetStateAction<any>;
-    filter: (text: string) => void;
+    filter: (t:string, o: 'gender' | 'name') => void;
 }
 const pacientsInitialState: Array<IPacient> = [];
 
@@ -46,15 +47,15 @@ export const ContextProvider: React.FC = ({ children }) => {
         setLoading(false)
     }
 
-    const filter = (text: string) => {
+    const filter = (text: string, option: 'name' | 'gender') => {
         console.log(text.trim().length)
-        
+    
         const filteredPacients = text.trim().length > 0 ? pacients
-            .filter((pacient) => pacient.name.first.toLowerCase().indexOf(text.trim().toLowerCase()) >= 0) : pacients
-
-            console.log('filtrados: ' + filteredPacients.length);
-            console.log('todos: ' + pacients.length);
+            .filter((pacient) => formatFullName(pacient).toLowerCase().indexOf(text.trim().toLowerCase()) >= 0) : pacients
+        
+            
             setDisplayingPacients(filteredPacients);
+     
     }
 
 

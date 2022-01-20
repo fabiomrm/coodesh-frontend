@@ -20,17 +20,16 @@ export const Input = () => {
         transform: 'translateY(-50%)'
     };
 
-    const handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFilter = (e: React.ChangeEvent<HTMLInputElement>, option: 'name' | 'gender') => {
       
-        if(e.target.name === "search-name") {
-            filter(e.target.value);
-        }
+            filter(e.target.value, option);
+        
     }
 
     
     return (
         <StyledInput>
-          <input type="text" name="search-name" placeholder="Searching" onChange={(e) => handleFilter(e)}/>
+          <input type="text" name="search-name" placeholder="Buscar por nome" onChange={(e) => handleFilter(e, 'name')}/>
           <RiUserSearchFill style={iconStyle}/>
         </StyledInput>
     );
