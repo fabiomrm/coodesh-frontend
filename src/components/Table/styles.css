@@ -15,10 +15,16 @@
 
   thead tr th{
     background-color: #0EE7B7;
+    border: 1px solid #000;
   }
 
+  tbody tr td{
+    border: 1px solid #000;
+  }
+
+
   tbody tr:nth-child(2n) {
-  background-color: #F4F4FF;
+    background-color: #F4F4FF;
   }
 
 
