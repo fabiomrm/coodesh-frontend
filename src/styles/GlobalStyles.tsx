@@ -6,17 +6,17 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         font-family: 'Montserrat', sans-serif;
-        /* ::-webkit-scrollbar {
+        ::-webkit-scrollbar {
             width: 8px;
             height: 5px;
         }
         ::-webkit-scrollbar-thumb {
-            background: ${({ theme }) => theme.colors.primary};
+            background: ${({ theme }) => theme.colors.border};
             border-radius: 10px;
         }
         ::-webkit-scrollbar-track {
             background: ${({ theme }) => theme.colors.primary};
-        } */
+        }
     }
 
     html {

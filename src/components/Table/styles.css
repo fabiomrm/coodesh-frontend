@@ -13,6 +13,14 @@
     width: 100%;
   }
 
+  thead tr th{
+    background-color: #0EE7B7;
+  }
+
+  tbody tr:nth-child(2n) {
+  background-color: #F4F4FF;
+  }
+
 
   th,
   td {
