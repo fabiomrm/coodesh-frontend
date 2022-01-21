@@ -1,27 +1,24 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const StyledHeader = styled.header`
-    box-shadow:  0 0.06rem .125rem 0 #8BE3D8;
-    background: ${(props) => props.theme.colors.primary};
-    padding: 1.25rem 0 ;
-    height: 4.375rem;
 
+export const Container = styled.header`
+    width: 100%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-
+    height: 4rem;
+    box-shadow: 0px 0px 2px ${({theme}) => theme.colors.backgroundLight};
+    background: ${({ theme }) => theme.colors.backgroundLight};
     
-    & div.left,
-    & div.right {
-        display: flex;   
-        align-items: center;
-        margin: 0 2rem;
-    }
 
-    
-    & img {
-        width: 60x;
+    > div.image-wrapper {
+        width: 60px;
         height: 60px;
     }
 
-    
+    > div.logo {
+        display: flex;
+        gap: 10px;
+        font-size: ${({ theme }) => theme.fontSizes.small};
+    }
 `;

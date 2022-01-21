@@ -1,7 +1,9 @@
+import './styles.css';
+
 export const Loading: React.FC = () => {
     return (
-        <div>
-            <p>CARREGANDO...</p>
+        <div style={{position: 'relative'}}>
+            <div className="spin"></div>
         </div>
     )
 }

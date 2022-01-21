@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
 import { StyledButton } from "../../components/Button/styles";
+import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Loading } from "../../components/Loading";
 import { PacientModal } from "../../components/Modal";
 import { Table } from "../../components/Table";
 import { Context } from "../../contexts/PacientsContext";
 import { IPacient } from "../../interfaces/IPacient";
+import { HomeContainer } from "../../styles/HomeStyles";
 
 export const Home = () => {
   const { page, setPage, loading, setLoading } = useContext(Context);
@@ -28,22 +30,24 @@ export const Home = () => {
   };
 
   return (
-    <>
-    <div style={{display: 'flex', flexDirection: 'column', margin: '0 auto', maxWidth: '510px' }}>
-      {modalPacient && (
-          <PacientModal pacient={modalPacient} clickFn={hideModal} />
-        )}
+    <HomeContainer>
+    <Header />
 
-        <Input />
-        <Table handleModal={showModal} />
+    <main className="container">  
+        {modalPacient && (
+            <PacientModal pacient={modalPacient} clickFn={hideModal} />
+          )}
 
-        {loading ? (
-          <Loading />
-        ) : (
-          <StyledButton style={{margin: '0 auto'}}onClick={handleLoadMore}>Carregar mais</StyledButton>
-        )}
-    </div>
+          <Input />
+          <Table handleModal={showModal} />
+
+          {loading ? (
+            <Loading />
+          ) : (
+            <StyledButton style={{margin: '40px auto'}}onClick={handleLoadMore}>Carregar mais</StyledButton>
+          )}
+    </main>
       
-    </>
+    </HomeContainer>
   );
 };

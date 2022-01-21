@@ -1,19 +1,17 @@
 
-import { StyledHeader } from "./styles";
+import { Container } from "./styles";
 
 export const Header = () => {
   return (
-    <StyledHeader>  
-            <div className="left">
-                <div className="image-wrapper">
-                    <img src="/images/logo.png" alt="logo" />
-                </div>
-                <h1>Nome da Empresa</h1>
+    <Container>  
+            <div className="image-wrapper logo">
+              <img src="/images/logo.png" alt="logo" />
+              <h1>Nome da Empresa</h1>
             </div>
 
-            <div className="right">
+            <div className="image-wrapper user">
                 <img src="/images/logo.png" alt="user" />
             </div>
-    </StyledHeader>
+    </Container>
   );
 };
